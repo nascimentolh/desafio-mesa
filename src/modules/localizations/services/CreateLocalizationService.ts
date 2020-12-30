@@ -1,4 +1,4 @@
-import Localization from 'models/Localization';
+import Localization from '@modules/localizations/infra/typeorm/entities/Localization';
 import { getRepository } from 'typeorm';
 
 interface Request {
