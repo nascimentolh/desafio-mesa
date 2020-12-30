@@ -10,7 +10,7 @@ interface IRequest {
   old_password?: string;
   password?: string;
 }
-
+@injectable()
 class UpdateUserService {
   constructor(
     @inject('UsersRepository')

@@ -1,15 +1,25 @@
+import 'reflect-metadata';
 import AppError from '@shared/errors/AppError';
-import FakeLocalizationsRepository from '../repositories/fakes/FakeUsersRepository';
 import CreateUserService from './CreateUserService';
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
+import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
+
+let fakeUsersRepository: FakeUsersRepository;
+let fakeHashProvider: FakeHashProvider;
+let createUserService: CreateUserService;
 
 describe('CreateUser', () => {
-  it('should be able to create a new user with same email from another', async () => {
-    const fakeRepository = new FakeLocalizationsRepository();
-    const hashProvider = new FakeHashProvider();
-    const createUser = new CreateUserService(fakeRepository, hashProvider);
+  beforeEach(() => {
+    fakeUsersRepository = new FakeUsersRepository();
+    fakeHashProvider = new FakeHashProvider();
 
-    const user = await createUser.execute({
+    createUserService = new CreateUserService(
+      fakeUsersRepository,
+      fakeHashProvider,
+    );
+  });
+  it('should be able to create a new user with same email from another', async () => {
+    const user = await createUserService.execute({
       name: 'Sr.Lorem',
       email: 'lorem@ipsum.com',
       password: '123456',
@@ -19,18 +29,14 @@ describe('CreateUser', () => {
   });
 
   it('should not be able to create a new user', async () => {
-    const fakeRepository = new FakeLocalizationsRepository();
-    const hashProvider = new FakeHashProvider();
-    const createUser = new CreateUserService(fakeRepository, hashProvider);
-
-    await createUser.execute({
+    await createUserService.execute({
       name: 'Sr.Lorem',
       email: 'lorem@ipsum.com',
       password: '123456',
     });
 
     expect(
-      createUser.execute({
+      createUserService.execute({
         name: 'Sr.Lorem',
         email: 'lorem@ipsum.com',
         password: '123456',
