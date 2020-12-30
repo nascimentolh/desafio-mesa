@@ -1,20 +1,12 @@
 import { Router } from 'express';
-import { container } from 'tsyringe';
 import authenticated from '@modules/users/infra/http/middlewares/authenticated';
-import CreateLocalizationService from '@modules/localizations/services/CreateLocalizationService';
+import LocalizationsController from '../controllers/LocalizationsController';
 
 const localizationsRouter = Router();
+const localizationsController = new LocalizationsController();
 
 localizationsRouter.use(authenticated);
 
-localizationsRouter.post('/', async (request, response) => {
-  const { name, lng, lat } = request.body;
-
-  const createLocalization = container.resolve(CreateLocalizationService);
-
-  const localization = await createLocalization.execute({ name, lng, lat });
-
-  return response.send(localization);
-});
+localizationsRouter.post('/', localizationsController.create);
 
 export default localizationsRouter;

@@ -17,18 +17,6 @@ class LocalizationsRepository implements ILocalizationsRepository {
 
     return localization;
   }
-
-  public async save(localization: Localization): Promise<Localization> {
-    return this.ormRepository.save(localization);
-  }
-
-  public async resultMapped(): Promise<any> {
-    const entityManager = getManager();
-    const getResultsMapped = await entityManager.query(
-      `SELECT * FROM localizations`,
-    );
-    return getResultsMapped;
-  }
 }
 
 export default LocalizationsRepository;
