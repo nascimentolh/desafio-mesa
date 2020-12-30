@@ -15,10 +15,10 @@ class Localization {
   name: string;
 
   @Column()
-  long: string;
+  lng: number;
 
   @Column()
-  lat: string;
+  lat: number;
 
   @CreateDateColumn()
   created_at: Date;

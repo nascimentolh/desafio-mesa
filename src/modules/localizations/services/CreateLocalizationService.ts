@@ -1,19 +1,27 @@
 import Localization from '@modules/localizations/infra/typeorm/entities/Localization';
 import { getRepository } from 'typeorm';
+import { injectable, inject } from 'tsyringe';
+import ILocalizationsRepository from '../repositories/ILocalizationsRepository';
 
-interface Request {
+interface IRequest {
   name: string;
-  long: string;
-  lat: string;
+  lng: number;
+  lat: number;
 }
 
+@injectable()
 class CreateLocalizationService {
-  public async execute({ name, long, lat }: Request): Promise<Localization> {
-    const localizationRepository = getRepository(Localization);
+  constructor(
+    @inject('LocalizationsRepository')
+    private localizationsRepository: ILocalizationsRepository,
+  ) {}
 
-    const localization = localizationRepository.create({ name, long, lat });
-
-    await localizationRepository.save(localization);
+  public async execute({ name, lng, lat }: IRequest): Promise<Localization> {
+    const localization = await this.localizationsRepository.create({
+      name,
+      lng,
+      lat,
+    });
 
     return localization;
   }
