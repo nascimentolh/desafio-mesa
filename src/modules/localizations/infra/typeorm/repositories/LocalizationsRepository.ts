@@ -17,6 +17,10 @@ class LocalizationsRepository implements ILocalizationsRepository {
 
     return localization;
   }
+
+  public async listAll(): Promise<Localization[]> {
+    return this.ormRepository.find();
+  }
 }
 
 export default LocalizationsRepository;

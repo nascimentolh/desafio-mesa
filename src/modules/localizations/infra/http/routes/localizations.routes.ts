@@ -7,6 +7,7 @@ const localizationsController = new LocalizationsController();
 
 localizationsRouter.use(authenticated);
 
+localizationsRouter.get('/', localizationsController.index);
 localizationsRouter.post('/', localizationsController.create);
 
 export default localizationsRouter;
