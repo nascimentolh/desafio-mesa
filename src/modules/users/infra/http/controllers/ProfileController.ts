@@ -1,3 +1,4 @@
+import UserFormat from '@modules/users/helpers/UserFormat';
 import ShowProfileService from '@modules/users/services/ShowProfileService';
 import UpdateUserService from '@modules/users/services/UpdateUserService';
 import { Request, Response } from 'express';
@@ -28,7 +29,9 @@ export default class ProfileController {
       password,
     });
 
-    delete user.password;
-    return response.json(user);
+    const userFormat = new UserFormat();
+    const parsedUser = userFormat.userFormat(user);
+
+    return response.json(parsedUser);
   }
 }

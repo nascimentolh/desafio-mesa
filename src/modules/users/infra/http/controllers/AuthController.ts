@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import AuthenticateUserService from '@modules/users/services/AuthenticateUserService';
+import UserFormat from '@modules/users/helpers/UserFormat';
 
 export default class AuthController {
   public async authenticate(
@@ -15,8 +16,10 @@ export default class AuthController {
       email,
       password,
     });
-    delete user.password;
 
-    return response.json({ user, access_token });
+    const userFormat = new UserFormat();
+    const parsedUser = userFormat.userFormat(user);
+
+    return response.json({ parsedUser, access_token });
   }
 }
