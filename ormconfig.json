@@ -5,6 +5,9 @@
   "username": "mbtaavbcnvscrs",
   "password": "610435d615081390175341623ecb97f3cc20a6ceee914a8e775b19e2ce19a2aa",
   "database": "d2v03vj4oabg0i",
+  "extra": {
+    "ssl": true
+  },
   "entities": ["./src/modules/**/infra/typeorm/entities/*.ts"],
   "migrations": ["./src/shared/infra/typeorm/migrations/*.ts"],
   "cli": {
