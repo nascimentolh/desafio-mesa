@@ -2,11 +2,12 @@ import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 import 'reflect-metadata';
 import routes from './routes';
-
 import '../typeorm';
 import AppError from '@shared/errors/AppError';
 import '@shared/container';
+import * as dotenv from 'dotenv';
 
+dotenv.config();
 const app = express();
 
 app.use(express.json());
@@ -20,9 +21,7 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
     });
   }
 
-  return response
-    .status(500)
-    .json({ error: 'error', message: 'Internal Server Error' });
+  return response.status(500).json({ error: 'error', message: err });
 });
 
 app.listen(3333, () => {

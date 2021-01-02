@@ -1,6 +1,6 @@
 import ICreateLocalizationDTO from '@modules/localizations/dtos/ICreateLocalizationDTO';
 import ILocalizationsRepository from '@modules/localizations/repositories/ILocalizationsRepository';
-import { getManager, getRepository, Repository } from 'typeorm';
+import { getRepository, Repository } from 'typeorm';
 import Localization from '../entities/Localization';
 
 class LocalizationsRepository implements ILocalizationsRepository {
@@ -19,7 +19,9 @@ class LocalizationsRepository implements ILocalizationsRepository {
   }
 
   public async listAll(): Promise<Localization[]> {
-    return this.ormRepository.find();
+    return this.ormRepository.find({
+      relations: ['ratings', 'ratings.user'],
+    });
   }
 }
 

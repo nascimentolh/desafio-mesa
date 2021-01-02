@@ -6,8 +6,10 @@ import ListLocalizationsService from '@modules/localizations/services/ListLocali
 export default class LocalizationsController {
   public async index(request: Request, response: Response): Promise<Response> {
     const listLocalizations = container.resolve(ListLocalizationsService);
-
-    const localizations = await listLocalizations.list();
+    const localizations = await listLocalizations.list({
+      user_id: request.user.id,
+      query: request.query.type as string,
+    });
 
     return response.json(localizations);
   }

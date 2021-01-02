@@ -1,13 +1,19 @@
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
 import FakeLocalizationsRepository from '../repositories/fakes/FakeLocalizationsRepository';
 import CreateLocalizationService from './CreateLocalizationService';
 
 let fakeRepository: FakeLocalizationsRepository;
 let createLocalizationService: CreateLocalizationService;
+let fakeCacheProvider: FakeCacheProvider;
 
 describe('CreateLocalization', () => {
   beforeEach(() => {
     fakeRepository = new FakeLocalizationsRepository();
-    createLocalizationService = new CreateLocalizationService(fakeRepository);
+    fakeCacheProvider = new FakeCacheProvider();
+    createLocalizationService = new CreateLocalizationService(
+      fakeRepository,
+      fakeCacheProvider,
+    );
   });
   it('should be able to create a new localization', async () => {
     const localization = await createLocalizationService.execute({
