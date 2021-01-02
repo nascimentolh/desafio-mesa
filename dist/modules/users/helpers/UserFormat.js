@@ -1,13 +1,17 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var UserFormat = /** @class */ (function () {
-    function UserFormat() {
-    }
-    UserFormat.prototype.userFormat = function (user) {
-        var parsed = user;
-        delete parsed.password;
-        return parsed;
-    };
-    return UserFormat;
-}());
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+class UserFormat {
+  userFormat(user) {
+    const parsed = user;
+    delete parsed.password;
+    return parsed;
+  }
+
+}
+
 exports.default = UserFormat;

@@ -1,14 +1,22 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = require("express");
-var authenticated_1 = __importDefault(require("@modules/users/infra/http/middlewares/authenticated"));
-var LocalizationsController_1 = __importDefault(require("../controllers/LocalizationsController"));
-var localizationsRouter = express_1.Router();
-var localizationsController = new LocalizationsController_1.default();
-localizationsRouter.use(authenticated_1.default);
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _express = require("express");
+
+var _authenticated = _interopRequireDefault(require("../../../../users/infra/http/middlewares/authenticated"));
+
+var _LocalizationsController = _interopRequireDefault(require("../controllers/LocalizationsController"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const localizationsRouter = (0, _express.Router)();
+const localizationsController = new _LocalizationsController.default();
+localizationsRouter.use(_authenticated.default);
 localizationsRouter.get('/', localizationsController.index);
 localizationsRouter.post('/', localizationsController.create);
-exports.default = localizationsRouter;
+var _default = localizationsRouter;
+exports.default = _default;

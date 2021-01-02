@@ -1,48 +1,44 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = __importDefault(require("express"));
+
+var _express = _interopRequireDefault(require("express"));
+
 require("express-async-errors");
+
 require("reflect-metadata");
-var routes_1 = __importDefault(require("./routes"));
+
+var _routes = _interopRequireDefault(require("./routes"));
+
 require("../typeorm");
-var AppError_1 = __importDefault(require("@shared/errors/AppError"));
-require("@shared/container");
-var dotenv = __importStar(require("dotenv"));
+
+var _AppError = _interopRequireDefault(require("../../errors/AppError"));
+
+require("../../container");
+
+var dotenv = _interopRequireWildcard(require("dotenv"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 dotenv.config();
-var app = express_1.default();
-app.use(express_1.default.json());
-app.use(routes_1.default);
-app.use(function (err, request, response, _) {
-    if (err instanceof AppError_1.default) {
-        return response.status(err.statusCode).json({
-            status: 'error',
-            message: err.message,
-        });
-    }
-    return response.status(500).json({ error: 'error', message: err });
+const app = (0, _express.default)();
+app.use(_express.default.json());
+app.use(_routes.default);
+app.use((err, request, response, _) => {
+  if (err instanceof _AppError.default) {
+    return response.status(err.statusCode).json({
+      status: 'error',
+      message: err.message
+    });
+  }
+
+  return response.status(500).json({
+    error: 'error',
+    message: err
+  });
 });
-app.listen(3333, function () {
-    console.log('Server Started');
+app.listen(3333, () => {
+  console.log('Server Started');
 });

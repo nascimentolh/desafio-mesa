@@ -1,11 +1,13 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+
+var _tsyringe = require("tsyringe");
+
+var _CacheRedisProvider = _interopRequireDefault(require("./implementations/CacheRedisProvider"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const providers = {
+  redis: _CacheRedisProvider.default
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var tsyringe_1 = require("tsyringe");
-var CacheRedisProvider_1 = __importDefault(require("./implementations/CacheRedisProvider"));
-var providers = {
-    redis: CacheRedisProvider_1.default,
-};
-tsyringe_1.container.registerSingleton('CacheProvider', providers.redis);
+
+_tsyringe.container.registerSingleton('CacheProvider', providers.redis);

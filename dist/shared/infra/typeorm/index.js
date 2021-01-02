@@ -1,4 +1,8 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var typeorm_1 = require("typeorm");
-typeorm_1.createConnection();
+
+var _typeorm = require("typeorm");
+
+(0, _typeorm.createConnection)({
+  type: 'postgres',
+  url: process.env.DATABASE_URL
+});

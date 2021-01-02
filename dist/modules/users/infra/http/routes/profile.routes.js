@@ -1,13 +1,21 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = require("express");
-var ProfileController_1 = __importDefault(require("../controllers/ProfileController"));
-var authenticated_1 = __importDefault(require("../middlewares/authenticated"));
-var profileRouter = express_1.Router();
-var profileController = new ProfileController_1.default();
-profileRouter.use(authenticated_1.default);
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _express = require("express");
+
+var _ProfileController = _interopRequireDefault(require("../controllers/ProfileController"));
+
+var _authenticated = _interopRequireDefault(require("../middlewares/authenticated"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const profileRouter = (0, _express.Router)();
+const profileController = new _ProfileController.default();
+profileRouter.use(_authenticated.default);
 profileRouter.put('/', profileController.update);
-exports.default = profileRouter;
+var _default = profileRouter;
+exports.default = _default;

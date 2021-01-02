@@ -1,13 +1,21 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = require("express");
-var authenticated_1 = __importDefault(require("@modules/users/infra/http/middlewares/authenticated"));
-var RatingsController_1 = __importDefault(require("../controllers/RatingsController"));
-var ratingsRouter = express_1.Router();
-var ratingsController = new RatingsController_1.default();
-ratingsRouter.use(authenticated_1.default);
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _express = require("express");
+
+var _authenticated = _interopRequireDefault(require("../../../../users/infra/http/middlewares/authenticated"));
+
+var _RatingsController = _interopRequireDefault(require("../controllers/RatingsController"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const ratingsRouter = (0, _express.Router)();
+const ratingsController = new _RatingsController.default();
+ratingsRouter.use(_authenticated.default);
 ratingsRouter.post('/', ratingsController.create);
-exports.default = ratingsRouter;
+var _default = ratingsRouter;
+exports.default = _default;
