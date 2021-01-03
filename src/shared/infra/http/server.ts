@@ -6,7 +6,6 @@ import '../typeorm';
 import AppError from '@shared/errors/AppError';
 import '@shared/container';
 import * as dotenv from 'dotenv';
-import swaggerUi from 'swagger-ui-express';
 
 dotenv.config();
 const app = express();
@@ -26,9 +25,6 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
     .status(500)
     .json({ error: 'error', message: 'Internal Server Error' + err });
 });
-
-const swaggerDocument = require('@shared/api-schema.json');
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(process.env.PORT || 3333, () => {
   console.log('Server Started');

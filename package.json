@@ -24,8 +24,6 @@
     "ioredis": "^4.19.4",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.5.1",
-    "swagger-jsdoc": "^6.0.0",
-    "swagger-ui-express": "^4.1.6",
     "tsyringe": "^4.4.0",
     "typeorm": "^0.2.29"
   },
@@ -41,8 +39,6 @@
     "@types/geojson": "^7946.0.7",
     "@types/jest": "^26.0.19",
     "@types/jsonwebtoken": "^8.5.0",
-    "@types/swagger-jsdoc": "^3.0.2",
-    "@types/swagger-ui-express": "^4.1.2",
     "@typescript-eslint/eslint-plugin": "^4.11.1",
     "babel-plugin-module-resolver": "^4.1.0",
     "babel-plugin-transform-typescript-metadata": "^0.3.1",
