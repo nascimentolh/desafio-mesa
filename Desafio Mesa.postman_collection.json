@@ -1,0 +1,373 @@
+{
+	"info": {
+		"_postman_id": "f21286ac-38b6-4007-97b5-1811c5b308ee",
+		"name": "Desafio Mesa",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Sessions",
+			"item": [
+				{
+					"name": "Create Session",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.globals.set(\"access-token\", jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"luizbmthoz@gmail.com\",\n    \"password\": \"teste\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://mesa-app-challenge.herokuapp.com/auth",
+							"protocol": "https",
+							"host": [
+								"mesa-app-challenge",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Luiz Nascimento\",\n    \"email\": \"luizbmthoz@gmail.com\",\n    \"password\": \"teste\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://mesa-app-challenge.herokuapp.com/users",
+							"protocol": "https",
+							"host": [
+								"mesa-app-challenge",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Avatar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDU3MjY1MzIsImV4cCI6MTYwNTgxMjkzMiwic3ViIjoiZGU3OTZlNWYtN2FhOS00OWEzLWE2OWMtMjRiZjQ3NGM3ZDQ2In0.tLaqFf6XZaAdfuEeJ4Fn4QjFc8UTwIsXq-OTZJTKgJc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/home/luiz/Imagens/yzc4rno0_400x400.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3333/users/avatar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"users",
+								"avatar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Localizations",
+			"item": [
+				{
+					"name": "New Localization",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Degust Restaurante\",\n    \"lat\": -19.467588737050818,\n    \"lng\": -42.560796485063136\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://mesa-app-challenge.herokuapp.com/localizations",
+							"protocol": "https",
+							"host": [
+								"mesa-app-challenge",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"localizations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Localizations",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://mesa-app-challenge.herokuapp.com/localizations",
+							"protocol": "https",
+							"host": [
+								"mesa-app-challenge",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"localizations"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ratings",
+			"item": [
+				{
+					"name": "Create Rating",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"localization_id\": \"c3a5ba31-d954-47a7-8431-6428f0565deb\",\n    \"rating\": 4.3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://mesa-app-challenge.herokuapp.com/ratings/",
+							"protocol": "https",
+							"host": [
+								"mesa-app-challenge",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"ratings",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Profile",
+			"item": [
+				{
+					"name": "Get User Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://mesa-app-challenge.herokuapp.com/profile",
+							"protocol": "https",
+							"host": [
+								"mesa-app-challenge",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"profile"
+							]
+						},
+						"description": "Returns user's logged profile"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Luizão\",\n    \"email\": \"luizbmthoz@gmail.com\",\n    \"old_password\": \"teste\",\n    \"password\": \"teste2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://mesa-app-challenge.herokuapp.com/profile",
+							"protocol": "https",
+							"host": [
+								"mesa-app-challenge",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{access-token}}",
+						"type": "string"
+					}
+				]
+			}
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access-token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

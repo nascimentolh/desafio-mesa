@@ -1,19 +1,112 @@
-# DESAFIO MESA
+# DESAFIO MESA API
 
-- O usuário autenticado poderá cadastrar um novo local;
+### Teconologias
 
-- O usuário autenticado poderá visualizar os locais já cadastrados por ele e por outros usuários em formato de mapa e lista;
+- Node Js
+- Express
+- Typescript
+- TypeORM
+- JWT
+- Babel
+- PostgreSQL
+- Redis
+- Jest
 
-  - obs.: No modo "Lista", a API deverá retornar os locais em ordem alfabética; no modo "Mapa", deverá retornar os locais ordenados por proximidade.
+### Como Utilizar
 
-- O usuário autenticado poderá avaliar um local, com rating e comentário;
+Acesse https://mesa-app-challenge.herokuapp.com
 
-- O usuário autenticado poderá visualizar as avaliações de um local;
+```sh
+POST /users
+    Descrição: Rota utilizada para criar um usuário novo, e
+    poder utilizar os demais recursos
 
-- O usuário autenticado poderá também visualizar seu perfil, alterar e-mail, alterar senha e fazer logout.
+    Request Body:
+    {
+        "name": "Jhon Doe", string
+        "email": "jhon@doe.com", string
+        "passowrd": "your password here" string
+    }
+```
 
-# RUN APP
+```sh
+POST /auth
+    Descrição: Rota autenticar o usuário
 
-- docker run --name desafio-mesa -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+    Request Body:
+    {
+        "email": "Jhon Doe",
+        "password": "your password here"
+    }
+```
 
-- docker run --name redis-mesa -p 6379:6379 -d -t redis:alpine
+```sh
+GET /profile
+    Descrição: Rota que retorna o perfil do usuário cadastrado.
+
+    Request Header:
+        Authorization: Bearer TOKEN_JWT
+```
+
+```sh
+PUT /profile
+    Descrição: Rota para atualizar o perfil do usuário logado.
+
+    Request Header:
+        Authorization: Bearer TOKEN_JWT
+
+    Request Body:
+        {
+            "name": "Seu novo nome para atualizar", string
+            "email": "Seu novo email para atualizar", string
+            - Caso for atualizar a senha devera fornecer a
+            senha antiga. Do contrario os campos abaixo são
+            dispensavéis
+            "old_password": "Sua senha antiga", string
+            "password": "Sua nova senha para atualizar" string
+        }
+```
+
+```sh
+POST /localizations
+    Descrição: Rota para inserir uma localização
+
+    Request Header:
+        Authorization: Bearer TOKEN_JWT
+
+    Request Body:
+        {
+            "name": "Nome para sua localizacao", string
+            "lng": "Longitude da localizacao", float
+            "lat": "Latitude da localizacao", float
+        }
+    -- Pode ser utilizado localizaçoes fornecidas pelo google maps ao clicar sobre os locais para fazer um banco de dados com mais realidade.
+```
+
+```sh
+GET /localizations
+    Descrição: Rota para consultar as localizações já cadastradas por você
+    e por outros usuários.
+
+    Query Params:
+        ?type=map (Opcional)
+        -Retorna as localizações ordenadas pela distancia que elas se encontram do solicitante da requisição.
+
+    Request Header:
+        Authorization: Bearer TOKEN_JWT
+```
+
+```sh
+POST /ratings
+    Descrição: Rota para cadastrar uma avaliação para uma localização
+
+    Request Header:
+        Authorization: Bearer TOKEN_JWT
+
+    Request Body:
+    {
+        "localization_id": "ID da localização a ser avaliada", string
+        "rating": 4.6, float (máx 5)
+        "comment": "Um comentário sobre sua avaliacão", string (Opcional)
+    }
+```
