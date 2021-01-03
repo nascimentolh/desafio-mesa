@@ -12,7 +12,10 @@ export default class ProfileController {
 
     const user = await showProfile.execute({ user_id });
 
-    return response.json(user);
+    const userFormat = new UserFormat();
+    const parsedUser = userFormat.userFormat(user);
+
+    return response.json(parsedUser);
   }
 
   public async update(request: Request, response: Response): Promise<Response> {

@@ -24,7 +24,9 @@ class ProfileController {
     const user = await showProfile.execute({
       user_id
     });
-    return response.json(user);
+    const userFormat = new _UserFormat.default();
+    const parsedUser = userFormat.userFormat(user);
+    return response.json(parsedUser);
   }
 
   async update(request, response) {

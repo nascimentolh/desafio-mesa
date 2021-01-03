@@ -20,6 +20,6 @@ export default class AuthController {
     const userFormat = new UserFormat();
     const parsedUser = userFormat.userFormat(user);
 
-    return response.json({ parsedUser, access_token });
+    return response.json({ user: parsedUser, access_token });
   }
 }

@@ -24,7 +24,7 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
 
   return response
     .status(500)
-    .json({ error: 'error', message: 'Internal Server Error' });
+    .json({ error: 'error', message: 'Internal Server Error' + err });
 });
 
 const swaggerDocument = require('@shared/api-schema.json');
